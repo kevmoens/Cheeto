@@ -1,0 +1,193 @@
+﻿@using Cheeto.Models
+@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+<style>
+    .mybtn {
+        color: #f80;
+        background-color: #0df;
+        border-color: #f80;
+    }
+    .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+        align-items: flex-start;
+    }
+    .flex-item {
+        flex: 0 1 auto;
+        align-self: auto;
+        margin: 15px;
+    }
+    img {
+        width: 150px;
+        height: 150px;
+    }
+    .blank-img {
+        width:150px;
+        height:150px;
+    }
+</style>
+
+<h1>Counter</h1>
+<div class="flex-container">
+
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.PuffyCounter</p>
+        <div class="blank-img">
+            <img src="CHEETOPUFFY.jpeg" />
+        </div>
+        <button class="btn mybtn btn-primary" @onclick="IncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="ResetCounter">Reset</button>
+    </div>
+
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.PawsCounter</p>
+        <div class="blank-img"></div>
+        <button class="btn mybtn btn-primary" @onclick="pawIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="pawResetCounter">Reset</button>
+    </div>
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.HotAsteroidsCounter</p>
+        <div class="blank-img"></div>
+        <button class="btn mybtn btn-primary" @onclick="hotAIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="hotAResetCounter">Reset</button>
+    </div>
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.FlaminHotCounter</p>
+        <div class="blank-img">
+            <img src="CHEETOFLAMINHOT.jpeg" />
+        </div>
+
+        <button class="btn mybtn btn-primary" @onclick="FlameIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="FlameResetCounter">Reset</button>
+    </div>
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.BakedCounter</p>
+        <div class="blank-img">
+            <img src="https://www.kroger.com/product/images/large/front/0002840018390"/>
+        </div>
+        <button class="btn mybtn btn-primary" @onclick="BakeIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="BakeResetCounter">Reset</button>
+    </div>
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.CheddarCrunchCounter</p>
+        <div class="blank-img">
+            <img src="CHEETOCHEDDARJALEPENO.jpeg" />
+        </div>
+
+        <button class="btn mybtn btn-primary" @onclick="ChedIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="ChedResetCounter">Reset</button>
+    </div>
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.CheddarPuffCounter</p>
+        <div class="blank-img"></div>
+        <button class="btn mybtn btn-primary" @onclick="CheddarIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="CheddarResetCounter">Reset</button>
+    </div>
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.CrunchyCounter</p>
+        <div class="blank-img">
+            <img src="CHEETOCRUNCHY.jpeg" />
+        </div>
+
+        <button class="btn mybtn btn-primary" @onclick="CrunIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="CrunResetCounter">Reset</button>
+    </div>
+    <div class="flex-item">
+        <p role="status">Current cheetos eaten: @saveCounter.OtherCounter</p>
+        <div class="blank-img"></div>
+        <button class="btn mybtn btn-primary" @onclick="OthIncrementCount">Click me</button>
+        <button class="btn mybtn btn-primary" @onclick="OthResetCounter">Reset</button>
+    </div>
+</div>
+@code {
+    [Inject]
+    private SaveCounter saveCounter { get; set; }
+
+    private void IncrementCount()
+    {
+        saveCounter.PuffyCounter++;
+    }
+    private void ResetCounter()
+    {
+        saveCounter.PuffyCounter = 0;
+    }
+
+    private void pawIncrementCount()
+    {
+        saveCounter.PawsCounter++;
+    }
+    private void pawResetCounter()
+    {
+        saveCounter.PawsCounter = 0;
+    }
+
+    private void hotAIncrementCount()
+    {
+        saveCounter.HotAsteroidsCounter++;
+    }
+    private void hotAResetCounter()
+    {
+        saveCounter.HotAsteroidsCounter = 0;
+    }
+
+    private void FlameIncrementCount()
+    {
+        saveCounter.FlaminHotCounter++;
+    }
+    private void FlameResetCounter()
+    {
+        saveCounter.FlaminHotCounter = 0;
+    }
+
+    private void BakeIncrementCount()
+    {
+        saveCounter.BakedCounter++;
+    }
+    private void BakeResetCounter()
+    {
+        saveCounter.BakedCounter = 0;
+    }
+
+    private void ChedIncrementCount()
+    {
+        saveCounter.CheddarCrunchCounter++;
+    }
+    private void ChedResetCounter()
+    {
+        saveCounter.CheddarCrunchCounter = 0;
+    }
+
+    private void CheddarIncrementCount()
+    {
+        saveCounter.CheddarPuffCounter++;
+    }
+    private void CheddarResetCounter()
+    {
+        saveCounter.CheddarPuffCounter = 0;
+    }
+
+    private void CrunIncrementCount()
+    {
+        saveCounter.CrunchyCounter++;
+    }
+    private void CrunResetCounter()
+    {
+        saveCounter.CrunchyCounter = 0;
+    }
+
+    private void OthIncrementCount()
+    {
+        saveCounter.OtherCounter++;
+    }
+    private void OthResetCounter()
+    {
+        saveCounter.OtherCounter = 0;
+    }
+
+
+}
+

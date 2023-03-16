@@ -1,0 +1,27 @@
+﻿[
+  {
+    "date": "2023-01-01",
+    "temperatureC": 14,
+    "summary": "Cheeto"
+  },
+  {
+    "date": "2023-02-01",
+    "temperatureC": 14,
+    "summary": "Cheeto"
+  },
+  {
+    "date": "2023-03-01",
+    "temperatureC": 14,
+    "summary": "Cheeto"
+  },
+  {
+    "date": "2023-04-01",
+    "temperatureC": 14,
+    "summary": "Cheeto"
+  },
+  {
+    "date": "2023-05-01",
+    "temperatureC": 14,
+    "summary": "Cheeto"
+  }
+]
