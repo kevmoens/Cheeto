@@ -29,9 +29,18 @@
         width:150px;
         height:150px;
     }
-</style>
 
-<h1>Counter</h1>
+    .left-align {
+        float: left;
+    }
+    .right-align {
+        float: right;
+    }
+</style>
+<div class="overflow-hidden">
+    <h1 class="left-align">Counter</h1>
+    <button class="btn btn-primary right-align" @onclick="ResetAll">Reset All</button>
+</div>
 <div class="flex-container">
 
     <div class="flex-item">
@@ -45,13 +54,17 @@
 
     <div class="flex-item">
         <p role="status">Current Cheeto Paws eaten: @saveCounter.PawsCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="https://i5.walmartimages.com/asr/4db79061-1ec2-4552-af13-74d151f6e85e_1.68b102b4b5564304fe01020feb94593a.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff"/>
+        </div>
         <button class="btn mybtn btn-primary" @onclick="pawIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="pawResetCounter">Reset</button>
     </div>
     <div class="flex-item">
         <p role="status">Current Hot Asteroid Cheetos eaten: @saveCounter.HotAsteroidsCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="https://m.media-amazon.com/images/I/81ECzsIv1gL._SL1500_.jpg" />
+        </div>
         <button class="btn mybtn btn-primary" @onclick="hotAIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="hotAResetCounter">Reset</button>
     </div>
@@ -83,7 +96,9 @@
     </div>
     <div class="flex-item">
         <p role="status">Current Cheddar Puff Cheetos eaten: @saveCounter.CheddarPuffCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="https://i5.walmartimages.com/asr/ca97e88c-0d69-4b50-82f4-02b48a2a555f.7875a0d140ed286d3d9f8ad5f0e967d3.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" />
+        </div>
         <button class="btn mybtn btn-primary" @onclick="CheddarIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="CheddarResetCounter">Reset</button>
     </div>
@@ -98,7 +113,9 @@
     </div>
     <div class="flex-item">
         <p role="status">Current Other Cheetos eaten: @saveCounter.OtherCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="https://th.bing.com/th/id/R.9bc9763a973269efb8abbe6a338359b4?rik=6lCSpfWp35J%2f2g&pid=ImgRaw&r=0"/>
+        </div>
         <button class="btn mybtn btn-primary" @onclick="OthIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="OthResetCounter">Reset</button>
     </div>
@@ -187,7 +204,18 @@
     {
         saveCounter.OtherCounter = 0;
     }
-
+    private void ResetAll()
+    {
+        saveCounter.BakedCounter = 0;
+        saveCounter.FlaminHotCounter = 0;
+        saveCounter.OtherCounter = 0;
+        saveCounter.PawsCounter = 0;
+        saveCounter.CheddarCrunchCounter = 0;
+        saveCounter.CheddarPuffCounter = 0;
+        saveCounter.CrunchyCounter = 0;
+        saveCounter.HotAsteroidsCounter = 0;
+        saveCounter.PuffyCounter = 0;
+    }
 
 }
 
