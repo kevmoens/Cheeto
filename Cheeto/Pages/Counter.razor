@@ -8,6 +8,7 @@
         background-color: #0df;
         border-color: #f80;
     }
+
     .flex-container {
         display: flex;
         flex-direction: row;
@@ -16,18 +17,21 @@
         align-content: flex-start;
         align-items: flex-start;
     }
+
     .flex-item {
         flex: 0 1 auto;
         align-self: auto;
         margin: 15px;
     }
+
     img {
         width: 150px;
         height: 150px;
     }
+
     .blank-img {
-        width:150px;
-        height:150px;
+        width: 150px;
+        height: 150px;
     }
 </style>
 
@@ -45,13 +49,17 @@
 
     <div class="flex-item">
         <p role="status">Current Cheeto Paws eaten: @saveCounter.PawsCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="CHEETOPAWS.png" />
+        </div>
         <button class="btn mybtn btn-primary" @onclick="pawIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="pawResetCounter">Reset</button>
     </div>
     <div class="flex-item">
         <p role="status">Current Hot Asteroid Cheetos eaten: @saveCounter.HotAsteroidsCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="CHEETOHOTASTEROIDS.jpg" />
+        </div>
         <button class="btn mybtn btn-primary" @onclick="hotAIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="hotAResetCounter">Reset</button>
     </div>
@@ -67,7 +75,7 @@
     <div class="flex-item">
         <p role="status">Current Baked Cheetos eaten: @saveCounter.BakedCounter</p>
         <div class="blank-img">
-            <img src="https://www.kroger.com/product/images/large/front/0002840018390"/>
+            <img src="https://www.kroger.com/product/images/large/front/0002840018390" />
         </div>
         <button class="btn mybtn btn-primary" @onclick="BakeIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="BakeResetCounter">Reset</button>
@@ -83,7 +91,9 @@
     </div>
     <div class="flex-item">
         <p role="status">Current Cheddar Puff Cheetos eaten: @saveCounter.CheddarPuffCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="CHEDDARPUFFCHEETOS.png" />
+        </div>
         <button class="btn mybtn btn-primary" @onclick="CheddarIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="CheddarResetCounter">Reset</button>
     </div>
@@ -98,7 +108,9 @@
     </div>
     <div class="flex-item">
         <p role="status">Current Other Cheetos eaten: @saveCounter.OtherCounter</p>
-        <div class="blank-img"></div>
+        <div class="blank-img">
+            <img src="CHEETOOTHER.jfif" />
+        </div>
         <button class="btn mybtn btn-primary" @onclick="OthIncrementCount">Click me</button>
         <button class="btn mybtn btn-primary" @onclick="OthResetCounter">Reset</button>
     </div>
