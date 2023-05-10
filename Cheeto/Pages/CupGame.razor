@@ -1,0 +1,25 @@
+﻿@page "/cupgame"
+<h3>CupGame</h3>
+<div class="container">
+    <div class="item">
+        <img id="img1" src="CHEETOPUFFY.jpeg" onclick="this.classList.add('fade-move')" />
+    </div> 
+    <div class="item">
+        <img id="img2" src="CHEETOPUFFY.jpeg" onclick="this.classList.add('fade-move')" />
+    </div> 
+    <div class="item">
+        <img id="img3" src="CHEETOPUFFY.jpeg" onclick="this.classList.add('fade-move')" />
+    </div>
+</div>
+
+<button onclick="resetImage()">Reset Image</button>
+<script>
+  function resetImage() {
+    document.querySelector('#img1').classList.remove('fade-move');
+    document.querySelector('#img2').classList.remove('fade-move');
+    document.querySelector('#img3').classList.remove('fade-move');
+  }
+</script>
+@code {
+
+}
