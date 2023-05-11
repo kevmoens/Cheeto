@@ -1,25 +1,179 @@
 ﻿@page "/cupgame"
+@inject IJSRuntime JSRuntime
 <h3>CupGame</h3>
 <div class="container">
     <div class="item">
-        <img id="img1" src="CHEETOPUFFY.jpeg" onclick="this.classList.add('fade-move')" />
-    </div> 
+        <div class="img-container">
+            <img id="img1" class="@class1" src="CHEETOPUFFY.jpeg" @onclick="NextRound1" />
+            <img class="bottom" src=@image1Src />
+        </div>
+    </div>
     <div class="item">
-        <img id="img2" src="CHEETOPUFFY.jpeg" onclick="this.classList.add('fade-move')" />
-    </div> 
+        <div class="img-container">
+            <img id="img2" class="@class2" src="CHEETOPUFFY.jpeg" @onclick="NextRound2" />
+            <img class="bottom" src=@image2Src />
+        </div>
+    </div>
     <div class="item">
-        <img id="img3" src="CHEETOPUFFY.jpeg" onclick="this.classList.add('fade-move')" />
+        <div class="img-container">
+            <img id="img3" class="@class3" src="CHEETOPUFFY.jpeg" @onclick="NextRound3" />
+            <img class="bottom" src=@image3Src />
+        </div>
     </div>
 </div>
 
-<button onclick="resetImage()">Reset Image</button>
-<script>
-  function resetImage() {
-    document.querySelector('#img1').classList.remove('fade-move');
-    document.querySelector('#img2').classList.remove('fade-move');
-    document.querySelector('#img3').classList.remove('fade-move');
-  }
-</script>
+@if (isGameOver) {
+    <button @onclick="Start">Start</button>
+}
+<p>Round: @round</p>
+<p>Score: @score</p>
+@if (isGameOver && round > 1)
+{
+    <p>Game Over</p>
+}
 @code {
+    const string blankImg = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    const string doritosImg = "DoritosChip.jfif";
+    const string cheetoImg = "SingleCheeto.png";
+    private string class1 = "top";
+    private string class2 = "top";
+    private string class3 = "top";
+    private string image1Src = blankImg;
+    private string image2Src = blankImg;
+    private string image3Src = blankImg;
+    private int score = 0;
+    private int round = 0;
+    private bool isGameOver = true;
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+    }
+    private void Start()
+    {
+        isGameOver = false;
+        score = 0;
+        round = 1;
+        resetImage();
+        Randomize();
 
+    }
+    private void Randomize()
+    {
+
+        image1Src = blankImg;
+        image2Src = blankImg;
+        image3Src = blankImg;
+        Random random = new Random();
+        int randomNumber1 = random.Next(0, 3);
+        int randomNumber2 = random.Next(0, 2);
+        switch (randomNumber1)
+        {
+            case 0:
+                image1Src = cheetoImg;
+                if (randomNumber2 == 0)
+                {
+                    image2Src = doritosImg;
+                }
+                else
+                {
+                    image3Src = doritosImg;
+                }
+                break;
+            case 1:
+                image2Src = cheetoImg;
+                if (randomNumber2 == 0)
+                {
+                    image1Src = doritosImg;
+                }
+                else
+                {
+                    image3Src = doritosImg;
+                }
+                break;
+            case 2:
+                image3Src = cheetoImg;
+                if (randomNumber2 == 0)
+                {
+                    image1Src = doritosImg;
+                }
+                else
+                {
+                    image2Src = doritosImg;
+                }
+                break;
+        }
+        StateHasChanged();
+    }
+    private async void NextRound1()
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+        NextRoundUpdateScore(image1Src);
+        await NextRoundUpdateUI();
+    }
+    private async void NextRound2()
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+        NextRoundUpdateScore(image2Src);
+        await NextRoundUpdateUI();
+    }
+    private async void NextRound3()
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+        NextRoundUpdateScore(image3Src);
+        await NextRoundUpdateUI();
+    }
+    private void NextRoundUpdateScore(string id)
+    {
+        if (id == cheetoImg)
+        {
+            score += 1;
+        }
+        else
+        {
+            if (id == doritosImg)
+            {
+                score -= 1;
+            }
+        }
+        StateHasChanged();
+    }
+    private async Task NextRoundUpdateUI()
+    {
+        if (round == 10)
+        {
+            isGameOver = true;
+            return;
+        }
+        round++;
+        if (round == 10)
+        {
+            isGameOver = true;
+        }
+        class1 = "top fade-move";
+        class2 = "top fade-move";
+        class3 = "top fade-move";
+        StateHasChanged();
+        await Task.Delay(3000);
+        resetImage();
+        Randomize();
+    }
+    private void resetImage()
+    {
+        image1Src = blankImg;
+        class1 = "top";
+        image2Src = blankImg;
+        class2 = "top";
+        image3Src = blankImg;
+        class3 = "top";
+        StateHasChanged();
+    }
 }
