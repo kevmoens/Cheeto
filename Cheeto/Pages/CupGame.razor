@@ -1,5 +1,5 @@
 ﻿@page "/cupgame"
-@inject IJSRuntime JSRuntime
+
 <h3>CupGame</h3>
 <div class="container">
     <div class="item">
@@ -31,6 +31,7 @@
 {
     <p>Game Over</p>
 }
+
 @code {
     const string blankImg = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
     const string doritosImg = "DoritosChip.jfif";
@@ -44,6 +45,7 @@
     private int score = 0;
     private int round = 0;
     private bool isGameOver = true;
+    private bool isRoundProcessing = false;
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
@@ -110,12 +112,20 @@
         {
             return;
         }
+        if (isRoundProcessing)
+        {
+            return;
+        }
         NextRoundUpdateScore(image1Src);
         await NextRoundUpdateUI();
     }
     private async void NextRound2()
     {
         if (isGameOver)
+        {
+            return;
+        }
+        if (isRoundProcessing)
         {
             return;
         }
@@ -128,11 +138,16 @@
         {
             return;
         }
+        if (isRoundProcessing)
+        {
+            return;
+        }
         NextRoundUpdateScore(image3Src);
         await NextRoundUpdateUI();
     }
     private void NextRoundUpdateScore(string id)
     {
+        isRoundProcessing = true;
         if (id == cheetoImg)
         {
             score += 1;
@@ -151,6 +166,7 @@
         if (round == 10)
         {
             isGameOver = true;
+            isRoundProcessing = false;
             return;
         }
         round++;
@@ -165,6 +181,7 @@
         await Task.Delay(3000);
         resetImage();
         Randomize();
+        isRoundProcessing = false;
     }
     private void resetImage()
     {
