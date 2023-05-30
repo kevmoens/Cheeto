@@ -1,0 +1,42 @@
+﻿@page "/cheetoclicker"
+@using Microsoft.JSInterop
+@using System.Text.Json;
+@inject IJSRuntime JSRuntime
+
+<h3>Cheeto Clicker</h3>
+<p>Welcome to Cheeto Clicker!</p>
+
+<p>Cheetos:@cheeto_clicks</p>
+
+<img src="SingleCheeto.png" alt="Example Image" style="width: 15%; margin-top: 50px;" onclick="@HandleImageClick">
+
+
+
+@code {
+    int cheeto_clicks;
+    protected override async Task OnInitializedAsync()
+    {
+        var localCheetoClicksJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "Cheeto_Clicks");
+
+        if (!string.IsNullOrEmpty(localCheetoClicksJson))
+        {
+            cheeto_clicks = JsonSerializer.Deserialize<int>(localCheetoClicksJson);
+            StateHasChanged();
+        }
+    }
+    private async Task HandleImageClick()
+    {
+        var localCheetoClicksJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "Cheeto_Clicks");
+
+        if (!string.IsNullOrEmpty(localCheetoClicksJson))
+        {
+            cheeto_clicks = JsonSerializer.Deserialize<int>(localCheetoClicksJson);
+        }
+
+        // Code to execute on image click
+        cheeto_clicks += 1;
+
+        await JSRuntime.InvokeVoidAsync("localStorage.setItem", "Cheeto_Clicks", JsonSerializer.Serialize(cheeto_clicks));
+    }
+
+}

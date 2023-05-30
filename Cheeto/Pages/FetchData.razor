@@ -1,5 +1,7 @@
 ﻿@page "/fetchdata"
+@using System.Text.Json;
 @inject HttpClient Http
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -12,7 +14,9 @@
     <p><em>Loading...</em></p>
 }
 else
-{
+{ 
+    <p>Cheetos: @cheeto_clicks</p>
+    <br />
     <table class="table">
         <thead>
             <tr>
@@ -39,9 +43,17 @@ else
 @code {
     private WeatherForecast[]? forecasts;
 
+    int cheeto_clicks;
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        var localCheetoClicksJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "Cheeto_Clicks");
+
+        if (!string.IsNullOrEmpty(localCheetoClicksJson))
+        {
+            cheeto_clicks = JsonSerializer.Deserialize<int>(localCheetoClicksJson);
+            StateHasChanged();
+        }
     }
 
     public class WeatherForecast
@@ -54,5 +66,7 @@ else
 
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
+
+
 }
 
